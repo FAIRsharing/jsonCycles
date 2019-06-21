@@ -8,6 +8,7 @@ pip install -r requirements.txt
 ### Run the tool
 ```
 from jsonCycles.graphCycles import Graph
+from jsonCycles.schemaResolver import SchemaResolver
 
 schema_URL = "https://datatagsuite.github.io/schema/study_schema.json" # can also be a file
 schema_from_url = SchemaResolver(schema_URL, 'url')
