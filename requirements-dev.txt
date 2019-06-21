@@ -1,0 +1,6 @@
+mock
+flake8==3.5.0
+nose-exclude
+coverage
+coveralls
+sphinx
