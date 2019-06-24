@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles)
+
 ### Create and use a virtual environment
 ```
 virtualenv venv
