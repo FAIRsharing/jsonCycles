@@ -29,28 +29,27 @@ class SchemaResolver:
 
     def __init__(self, schema, file_type, cpu=multiprocessing.cpu_count()):
 
-        self.cpu_count = cpu
-        if self.cpu_count >= 2:
-            self.cpu_count -= 1
+        # Setting up available threads (leave 1 if more than 2 available)
+        self.cpu_count = cpu if cpu < 2 else cpu - 1
+
+        self.file_type = file_type.upper() # URL or PATH
+        self.main_schema_name = self._get_name(schema) # Get the name of the main schema
+        self.base_url = self._get_base_url(schema) # get the base URL to retrieve IDs
+        self.schema = schema
+
+        self.output = {}
         self.main_schema = {}
         self.schemas = []
-        self.file_type = file_type.upper()
-        self.main_schema_name = self.get_name(schema)
-        self.base_url = self.get_base_url(schema)
-        self.output = {}
 
-        if self.file_type == "URL":
-            self.main_schema = self._get_schema_from_url(schema)
-            references = self.find_references(self.main_schema)
-            self.output[self.main_schema_name] = references
-            self._get_schemas_from_url(references)
+    def resolve_network(self):
+        if self.file_type == 'URL':
+            self.main_schema = self._get_schema_from_url(self.schema)
+        else:
+            self._get_schema_from_file(self.schema)
 
-        if self.file_type == "PATH":
-            self.main_schema = self._get_schema_from_file(schema)
-            references = self.find_references(self.main_schema)
-            self.output[self.main_schema_name] = references
-            self._get_schemas_from_url(references)
-            # TODO: extend to resolve also from files
+        references = self._find_references(self.main_schema)
+        self.output[self.main_schema_name] = references
+        self._get_schemas(references)
 
     @staticmethod
     def _get_schema_from_url(schema_url):
@@ -59,7 +58,15 @@ class SchemaResolver:
         except Exception as e:
             raise Exception(e)
 
-    def _get_schemas_from_url(self, schema_locations):
+    @staticmethod
+    def _get_schema_from_file(schema_path):
+        try:
+            with open(schema_path, "r") as schemaFile:
+                return json.load(schemaFile)
+        except Exception as e:
+            raise Exception(e)
+
+    def _get_schemas(self, schema_locations):
         processes = []
 
         for schema in schema_locations:
@@ -81,25 +88,17 @@ class SchemaResolver:
                 sub_schemas = results
 
             for sub_schema in sub_schemas:
-                sub_schema_name = self.get_name(sub_schema['id'])
-                local_references = self.find_references(sub_schema)
+                sub_schema_name = self._get_name(sub_schema['id'])
+                local_references = self._find_references(sub_schema)
                 self.output[sub_schema_name] = local_references
-                self._get_schemas_from_url(local_references)
+                self._get_schemas(local_references)
 
-    @staticmethod
-    def _get_schema_from_file(schema_path):
-        try:
-            with open(schema_path, "r") as schemaFile:
-                return json.load(schemaFile)
-        except Exception as e:
-            raise Exception(e)
-
-    def find_references(self, schema):
+    def _find_references(self, schema):
         schemas_to_load = []
 
         if SchemaKey.properties in schema:
             for k, val in schema[SchemaKey.properties].items():
-                loader = self.find_references(val)
+                loader = self._find_references(val)
                 if len(loader) > 0:
                     for schema in loader:
                         if schema not in schemas_to_load:
@@ -108,14 +107,14 @@ class SchemaResolver:
         for pattern in SchemaKey.sub_patterns:
             if pattern in schema:
                 for val in schema[pattern]:
-                    loader = self.find_references(val)
+                    loader = self._find_references(val)
                     if len(loader) > 0:
                         for schema in loader:
                             if schema not in schemas_to_load:
                                 schemas_to_load.append(schema)
 
         if SchemaKey.items in schema:
-            loader = self.find_references(schema['items'])
+            loader = self._find_references(schema['items'])
             if len(loader) > 0:
                 for schema in loader:
                     if schema not in schemas_to_load:
@@ -129,7 +128,7 @@ class SchemaResolver:
         return schemas_to_load
 
     @staticmethod
-    def get_name(schema_url):
+    def _get_name(schema_url):
         """ Extract the item name from it's URL
         :param schema_url: the URL of the schema
         :return name: the name of the schema (eg: 'item_schema.json')
@@ -137,7 +136,7 @@ class SchemaResolver:
         return schema_url.split("/")[-1].replace("#", '')
 
     @staticmethod
-    def get_base_url(schema_url):
+    def _get_base_url(schema_url):
         return '/'.join(schema_url.split("/")[:-1])
 
     def schemas_to_graph(self):
@@ -154,11 +153,12 @@ class SchemaResolver:
 
 
 if __name__ == '__main__':
-    schema_URL = "https://datatagsuite.github.io/schema/study_schema.json"
-    schema_paths = 'schemas/dats/study_schema.json'
+    schema_URL = "https://datatagsuite.github.io/schema/resolvedNetwork.json"
+    schema_paths = 'schemas/dats/resolvedNetwork.json'
 
-    # test_from_url = SchemaResolver(schema_paths, 'path')
+    # test_from_file = SchemaResolver(schema_paths, 'path')
     schema_from_url = SchemaResolver(schema_URL, 'url')
+    schema_from_url.resolve_network()
     raw_cycles = schema_from_url.schemas_to_graph()
     item_positions = list(schema_from_url.output.keys())
     for cycle in raw_cycles:

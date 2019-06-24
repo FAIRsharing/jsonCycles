@@ -1,0 +1,325 @@
+{
+  "study_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "date_info_schema.json",
+    "place_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "dataset_schema.json",
+    "material_schema.json",
+    "activity_schema.json",
+    "data_acquisition_schema.json",
+    "data_analysis_schema.json",
+    "category_values_pair_schema.json",
+    "study_group_schema.json",
+    "biological_entity_schema.json"
+  ],
+  "identifier_info_schema.json": [],
+  "alternate_identifier_info_schema.json": [],
+  "related_identifier_info_schema.json": [
+    "annotation_schema.json"
+  ],
+  "annotation_schema.json": [],
+  "date_info_schema.json": [
+    "annotation_schema.json"
+  ],
+  "place_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json"
+  ],
+  "person_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "organization_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "place_schema.json",
+    "annotation_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "category_values_pair_schema.json": [
+    "annotation_schema.json"
+  ],
+  "dataset_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "data_repository_schema.json",
+    "place_schema.json",
+    "data_type_schema.json",
+    "dataset_distribution_schema.json",
+    "dimension_schema.json",
+    "publication_schema.json",
+    "study_schema.json",
+    "data_acquisition_schema.json",
+    "data_analysis_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "license_schema.json",
+    "biological_entity_schema.json",
+    "taxonomic_info_schema.json",
+    "disease_schema.json",
+    "molecular_entity_schema.json",
+    "anatomical_part_schema.json",
+    "treatment_schema.json",
+    "material_schema.json",
+    "study_group_schema.json",
+    "annotation_schema.json",
+    "dataset_schema.json",
+    "grant_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "data_repository_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "annotation_schema.json",
+    "license_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "data_repository_schema.json",
+    "access_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "license_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "access_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "data_type_schema.json": [
+    "annotation_schema.json"
+  ],
+  "dataset_distribution_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "data_repository_schema.json",
+    "date_info_schema.json",
+    "license_schema.json",
+    "access_schema.json",
+    "annotation_schema.json",
+    "data_standard_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "data_standard_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "license_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "dimension_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "data_type_schema.json",
+    "material_schema.json",
+    "dataset_schema.json",
+    "consent_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "material_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "material_schema.json",
+    "anatomical_part_schema.json",
+    "place_schema.json",
+    "disease_schema.json",
+    "taxonomic_info_schema.json",
+    "biological_entity_schema.json",
+    "dimension_schema.json",
+    "consent_info_schema.json",
+    "annotation_schema.json",
+    "date_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "anatomical_part_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "disease_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "annotation_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "taxonomic_info_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "biological_entity_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "consent_info_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "license_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "publication_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "date_info_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "grant_schema.json",
+    "license_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "grant_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "study_schema.json",
+    "dataset_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "date_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "data_acquisition_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "place_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "material_schema.json",
+    "dataset_schema.json",
+    "instrument_schema.json",
+    "software_schema.json",
+    "dimension_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "instrument_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "data_acquisition_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "software_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "license_schema.json",
+    "date_info_schema.json",
+    "data_acquisition_schema.json",
+    "data_analysis_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "data_analysis_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "place_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "dataset_schema.json",
+    "instrument_schema.json",
+    "software_schema.json",
+    "dimension_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "molecular_entity_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "taxonomic_info_schema.json",
+    "dimension_schema.json",
+    "material_schema.json",
+    "genome_location_schema.json",
+    "annotation_schema.json",
+    "activity_schema.json",
+    "publication_schema.json",
+    "date_info_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "genome_location_schema.json": [],
+  "activity_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "place_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "dataset_schema.json",
+    "material_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "treatment_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "date_info_schema.json",
+    "place_schema.json",
+    "person_schema.json",
+    "organization_schema.json",
+    "annotation_schema.json",
+    "study_group_schema.json",
+    "molecular_entity_schema.json",
+    "material_schema.json",
+    "activity_schema.json",
+    "category_values_pair_schema.json"
+  ],
+  "study_group_schema.json": [
+    "identifier_info_schema.json",
+    "alternate_identifier_info_schema.json",
+    "related_identifier_info_schema.json",
+    "annotation_schema.json",
+    "material_schema.json",
+    "consent_info_schema.json",
+    "category_values_pair_schema.json"
+  ]
+}
