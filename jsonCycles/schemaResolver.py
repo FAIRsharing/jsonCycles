@@ -141,4 +141,3 @@ class SchemaResolver:
                 graph.add_edge(x, y)
 
         return graph.get_cycles()
-
