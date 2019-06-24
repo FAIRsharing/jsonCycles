@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles)
+[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles) [![Coverage Status](https://coveralls.io/repos/github/FAIRsharing/jsonCycles/badge.svg?branch=travis-integration)](https://coveralls.io/github/FAIRsharing/jsonCycles?branch=travis-integration)
 
 ### Create and use a virtual environment
 ```
