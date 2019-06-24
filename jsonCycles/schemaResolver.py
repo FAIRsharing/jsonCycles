@@ -1,4 +1,3 @@
-import multiprocessing
 from requests import get
 import json
 from jsonCycles.graphCycles import Graph
@@ -23,18 +22,13 @@ class SchemaResolver:
     :type schema: str
     :param file_type: the type of str pointing to the schema (URL or PATH)
     :type file_type: str
-    :param cpu: the number of threads to use. All by default
-    :type cpu: int
     """
 
-    def __init__(self, schema, file_type, cpu=multiprocessing.cpu_count()):
+    def __init__(self, schema, file_type):
 
-        # Setting up available threads (leave 1 if more than 2 available)
-        self.cpu_count = cpu if cpu < 2 else cpu - 1
-
-        self.file_type = file_type.upper() # URL or PATH
-        self.main_schema_name = self._get_name(schema) # Get the name of the main schema
-        self.base_url = self._get_base_url(schema) # get the base URL to retrieve IDs
+        self.file_type = file_type.upper()  # URL or PATH
+        self.main_schema_name = self._get_name(schema)  # Get the name of the main schema
+        self.base_url = self._get_base_url(schema)  # get the base URL to retrieve IDs
         self.schema = schema
 
         self.output = {}
@@ -44,8 +38,8 @@ class SchemaResolver:
     def resolve_network(self):
         if self.file_type == 'URL':
             self.main_schema = self._get_schema_from_url(self.schema)
-        else:
-            self._get_schema_from_file(self.schema)
+        elif self.file_type == 'PATH':
+            self.main_schema = self._get_schema_from_file(self.schema)
 
         references = self._find_references(self.main_schema)
         self.output[self.main_schema_name] = references
@@ -73,19 +67,16 @@ class SchemaResolver:
             if schema not in self.output.keys():
                 processes.append(self.base_url + '/' + schema)
 
-        results = []
+        sub_schemas = []
         if len(processes) > 0:
-            if self.file_type == 'URL':
-                p = multiprocessing.Pool(processes=self.cpu_count)
-                for url in processes:
-                    pp = p.apply_async(self._get_schema_from_url, [url])
-                    results.append(pp)
-                sub_schemas = [pp.get() for pp in results]
-            if self.file_type == 'PATH':
-                for url in processes:
-                    pp = self._get_schema_from_file(url)
-                    results.append(pp)
-                sub_schemas = results
+
+            for url in processes:
+                sub_schema = ""
+                if self.file_type == 'URL':
+                    sub_schema = self._get_schema_from_url(url)
+                elif self.file_type == 'PATH':
+                    sub_schema = self._get_schema_from_file(url)
+                sub_schemas.append(sub_schema)
 
             for sub_schema in sub_schemas:
                 sub_schema_name = self._get_name(sub_schema['id'])
@@ -151,18 +142,3 @@ class SchemaResolver:
 
         return graph.get_cycles()
 
-
-if __name__ == '__main__':
-    schema_URL = "https://datatagsuite.github.io/schema/resolvedNetwork.json"
-    schema_paths = 'schemas/dats/resolvedNetwork.json'
-
-    # test_from_file = SchemaResolver(schema_paths, 'path')
-    schema_from_url = SchemaResolver(schema_URL, 'url')
-    schema_from_url.resolve_network()
-    raw_cycles = schema_from_url.schemas_to_graph()
-    item_positions = list(schema_from_url.output.keys())
-    for cycle in raw_cycles:
-        local_cycle = []
-        for item in cycle:
-            local_cycle.append(item_positions[item])
-        print(local_cycle)

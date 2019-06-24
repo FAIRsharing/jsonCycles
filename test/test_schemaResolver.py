@@ -1,5 +1,6 @@
 import unittest
-import multiprocessing
+import os
+import json
 from jsonCycles.schemaResolver import SchemaResolver
 from jsonCycles.schemaResolver import SchemaKey
 
@@ -15,25 +16,63 @@ class SchemaKeyTestCase(unittest.TestCase):
         self.assertTrue(self.SchemaKey.properties == "properties")
         self.assertTrue(self.SchemaKey.definitions == 'definitions')
         self.assertTrue(self.SchemaKey.pattern_properties == "patternProperties")
-        self.assertTrue(self.SchemaKey.sub_patterns ==['anyOf', 'oneOf', 'allOf'])
+        self.assertTrue(self.SchemaKey.sub_patterns == ['anyOf', 'oneOf', 'allOf'])
 
 
-class SchemaResolverTestCase(unittest.TestCase):
+class SchemaResolverTestCase4Path(unittest.TestCase):
 
     def setUp(self):
-        schema = "https://datatagsuite.github.io/schema/resolvedNetwork.json"
-        self.SchemaResolver = SchemaResolver(schema, 'url')
+        schema = os.path.join(os.path.dirname(__file__), "schemas/dats/study_schema.json")
+        self.SchemaResolver = SchemaResolver(schema, 'path')
 
     def test_constructor(self):
-        cpu = multiprocessing.cpu_count()
-        cpu_count = cpu if cpu < 2 else cpu - 1
-        self.assertTrue(self.SchemaResolver.cpu_count == cpu_count)
-        self.assertTrue(self.SchemaResolver.file_type == 'URL')
-        self.assertTrue(self.SchemaResolver.main_schema_name == 'resolvedNetwork.json')
-        self.assertTrue(self.SchemaResolver.base_url == 'https://datatagsuite.github.io/schema')
-        self.assertTrue(self.SchemaResolver.schema == "https://datatagsuite.github.io/schema/resolvedNetwork.json")
+        self.assertTrue(self.SchemaResolver.file_type == 'PATH')
+        self.assertTrue(self.SchemaResolver.main_schema_name == 'study_schema.json')
 
     def test_resolve_network(self):
+        resolved_network_path = os.path.join(os.path.dirname(__file__),
+                                             'schemas/resolvedNetwork.json')
+        with open(resolved_network_path) as file:
+            expected_resolved_network = json.load(file)
+        file.close()
         self.SchemaResolver.resolve_network()
-        print(self.SchemaResolver.output)
-        self.assertTrue(self.SchemaResolver == 123)
+        self.assertTrue(self.SchemaResolver.output == expected_resolved_network)
+
+    def test_schemas_to_graph(self):
+        self.SchemaResolver.resolve_network()
+        raw_cycles = self.SchemaResolver.schemas_to_graph()
+        expected_cycles = [
+            [0, 10, 11, 11],
+            [0, 10, 17, 18, 17],
+            [0, 10, 17, 10],
+            [0, 10, 24, 25, 10],
+            [0, 10, 26, 27, 26],
+            [0, 10, 26, 28, 29, 28],
+            [0, 10, 26, 28, 26],
+            [0, 10, 26, 10],
+            [0, 10, 30, 32, 10],
+            [0, 10, 10]]
+        self.assertTrue(raw_cycles == expected_cycles)
+
+
+class SchemaResolverTestCase4URL(unittest.TestCase):
+
+    def setUp(self):
+        schema = "https://datatagsuite.github.io/schema/study_schema.json"
+        self.SchemaResolver = SchemaResolver(schema, 'URL')
+
+    def test_schemas_to_graph(self):
+        self.SchemaResolver.resolve_network()
+        raw_cycles = self.SchemaResolver.schemas_to_graph()
+        expected_cycles = [
+            [0, 10, 11, 11],
+            [0, 10, 17, 18, 17],
+            [0, 10, 17, 10],
+            [0, 10, 24, 25, 10],
+            [0, 10, 26, 27, 26],
+            [0, 10, 26, 28, 29, 28],
+            [0, 10, 26, 28, 26],
+            [0, 10, 26, 10],
+            [0, 10, 30, 32, 10],
+            [0, 10, 10]]
+        self.assertTrue(raw_cycles == expected_cycles)
