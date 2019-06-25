@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles) [![Coverage Status](https://coveralls.io/repos/github/FAIRsharing/jsonCycles/badge.svg?branch=master)](https://coveralls.io/github/FAIRsharing/jsonCycles?branch=master)
+https://github.com/FAIRsharing/jsonCycles/notebooks/Finding_jsonCycles.ipynb[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles) [![Coverage Status](https://coveralls.io/repos/github/FAIRsharing/jsonCycles/badge.svg?branch=master)](https://coveralls.io/github/FAIRsharing/jsonCycles?branch=master)
 
 ### Create and use a virtual environment
 ```
@@ -22,4 +22,4 @@ if __name__ == '__main__':
 
 jupyter notebook
 
-[notebooks/Finding_jsonCycles.ipynb#](https://github.com/FAIRsharing/jsonCycles/notebooks/Finding_jsonCycles.ipynb#)
+[notebooks/Finding_jsonCycles.ipynb#](https://github.com/FAIRsharing/jsonCycles/blob/master/notebooks/Finding_jsonCycles.ipynb)
