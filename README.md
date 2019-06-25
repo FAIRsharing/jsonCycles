@@ -1,4 +1,4 @@
-https://github.com/FAIRsharing/jsonCycles/notebooks/Finding_jsonCycles.ipynb[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles) [![Coverage Status](https://coveralls.io/repos/github/FAIRsharing/jsonCycles/badge.svg?branch=master)](https://coveralls.io/github/FAIRsharing/jsonCycles?branch=master)
+[![Build Status](https://travis-ci.org/FAIRsharing/jsonCycles.svg?branch=master)](https://travis-ci.org/FAIRsharing/jsonCycles) [![Coverage Status](https://coveralls.io/repos/github/FAIRsharing/jsonCycles/badge.svg?branch=master)](https://coveralls.io/github/FAIRsharing/jsonCycles?branch=master)
 
 ### Create and use a virtual environment
 ```
