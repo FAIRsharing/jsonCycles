@@ -5,3 +5,4 @@ venv/
 .gitignore
 __pycache__/
 jsonCycles/__pycache__/__init__.cpython-36.pyc
+.ipynb_checkpoints
