@@ -34,6 +34,7 @@ class SchemaResolver:
         self.output = {}
         self.main_schema = {}
         self.schemas = []
+        self.raw_cycles = []
 
     def resolve_network(self):
         if self.file_type == 'URL':
@@ -45,20 +46,28 @@ class SchemaResolver:
         self.output[self.main_schema_name] = references
         self._get_schemas(references)
 
+    def set_resolved_schemas(self, resolved_network):
+        """
+
+        :param resolved_network: a dictionary of all schemas in the network (keys)
+        and their references (values)
+        :return:
+        """
+        self.output = resolved_network
+
     @staticmethod
     def _get_schema_from_url(schema_url):
         try:
             return json.loads(get(schema_url).text)
-        except Exception as e:
-            raise Exception(e)
+        except Exception:
+            raise Exception('Please verify your URL or your schema')
 
     @staticmethod
     def _get_schema_from_file(schema_path):
-        try:
-            with open(schema_path, "r") as schemaFile:
-                return json.load(schemaFile)
-        except Exception as e:
-            raise Exception(e)
+        with open(schema_path, "r") as schemaFile:
+            schema = json.load(schemaFile)
+        schemaFile.close()
+        return schema
 
     def _get_schemas(self, schema_locations):
         processes = []
@@ -140,4 +149,5 @@ class SchemaResolver:
                 y = list(self.output.keys()).index(node_neighbour)
                 graph.add_edge(x, y)
 
-        return graph.get_cycles()
+        self.raw_cycles = graph.get_cycles()
+        # return graph.get_cycles()
