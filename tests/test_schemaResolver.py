@@ -39,7 +39,6 @@ class SchemaResolverTestCase4Path(unittest.TestCase):
         self.assertTrue(self.SchemaResolver.output == expected_resolved_network)
 
     def test_schemas_to_graph(self):
-        self.SchemaResolver.resolve_network()
         self.SchemaResolver.schemas_to_graph()
         expected_cycles = [
             [0, 10, 11, 11],
@@ -62,7 +61,6 @@ class SchemaResolverTestCase4URL(unittest.TestCase):
         self.SchemaResolver = SchemaResolver(schema, 'URL')
 
     def test_schemas_to_graph(self):
-        self.SchemaResolver.resolve_network()
         self.SchemaResolver.schemas_to_graph()
         expected_cycles = [
             [0, 10, 11, 11],

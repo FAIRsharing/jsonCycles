@@ -140,6 +140,10 @@ class SchemaResolver:
         return '/'.join(schema_url.split("/")[:-1])
 
     def schemas_to_graph(self):
+
+        if len(self.output) <= 0:
+            self.resolve_network()
+
         vertices = len(self.output)
         graph = Graph(vertices)
 
