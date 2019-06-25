@@ -40,7 +40,7 @@ class SchemaResolverTestCase4Path(unittest.TestCase):
 
     def test_schemas_to_graph(self):
         self.SchemaResolver.resolve_network()
-        raw_cycles = self.SchemaResolver.schemas_to_graph()
+        self.SchemaResolver.schemas_to_graph()
         expected_cycles = [
             [0, 10, 11, 11],
             [0, 10, 17, 18, 17],
@@ -52,7 +52,7 @@ class SchemaResolverTestCase4Path(unittest.TestCase):
             [0, 10, 26, 10],
             [0, 10, 30, 32, 10],
             [0, 10, 10]]
-        self.assertTrue(raw_cycles == expected_cycles)
+        self.assertTrue(self.SchemaResolver.raw_cycles == expected_cycles)
 
 
 class SchemaResolverTestCase4URL(unittest.TestCase):
@@ -63,7 +63,7 @@ class SchemaResolverTestCase4URL(unittest.TestCase):
 
     def test_schemas_to_graph(self):
         self.SchemaResolver.resolve_network()
-        raw_cycles = self.SchemaResolver.schemas_to_graph()
+        self.SchemaResolver.schemas_to_graph()
         expected_cycles = [
             [0, 10, 11, 11],
             [0, 10, 17, 18, 17],
@@ -75,4 +75,48 @@ class SchemaResolverTestCase4URL(unittest.TestCase):
             [0, 10, 26, 10],
             [0, 10, 30, 32, 10],
             [0, 10, 10]]
-        self.assertTrue(raw_cycles == expected_cycles)
+        self.assertTrue(self.SchemaResolver.raw_cycles == expected_cycles)
+
+
+class SchemaResolverTestCase4ResolvedNetwork(unittest.TestCase):
+
+    def setUp(self):
+        schema = os.path.join(os.path.dirname(__file__), "schemas/dats/study_schema.json")
+        self.schemaResolver = SchemaResolver(schema, 'path')
+
+    def test_set_resolved_schemas(self):
+        resolved_network_path = os.path.join(os.path.dirname(__file__),
+                                             "schemas/resolvedNetwork.json")
+        with open(resolved_network_path) as file:
+            resolved_network = json.load(file)
+        file.close()
+
+        self.schemaResolver.set_resolved_schemas(resolved_network)
+        self.schemaResolver.schemas_to_graph()
+        expected_cycles = [
+            [0, 10, 11, 11],
+            [0, 10, 17, 18, 17],
+            [0, 10, 17, 10],
+            [0, 10, 24, 25, 10],
+            [0, 10, 26, 27, 26],
+            [0, 10, 26, 28, 29, 28],
+            [0, 10, 26, 28, 26],
+            [0, 10, 26, 10],
+            [0, 10, 30, 32, 10],
+            [0, 10, 10]
+        ]
+        self.assertTrue(self.schemaResolver.raw_cycles == expected_cycles)
+
+
+class SchemaResolverTestCase4Errors(unittest.TestCase):
+
+    def setUp(self):
+        self.schema_url = "https://datatagsuite.github.io/schema/study_schema123.json"
+
+    def test_load_file(self):
+        schema_resolver = SchemaResolver(self.schema_url, 'url')
+        with self.assertRaises(Exception) as context:
+            schema_resolver.resolve_network()
+
+        print(context.exception)
+        self.assertTrue('Please verify your URL or your schema' in str(context.exception))
