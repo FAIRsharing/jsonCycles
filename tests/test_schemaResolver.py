@@ -85,7 +85,8 @@ class SchemaResolverTestCase4ResolvedNetwork(unittest.TestCase):
         self.schemaResolver = SchemaResolver(schema, 'path')
 
     def test_set_resolved_schemas(self):
-        resolved_network_path = os.path.join(os.path.dirname(__file__), "schemas/resolvedNetwork.json")
+        resolved_network_path = os.path.join(os.path.dirname(__file__),
+                                             "schemas/resolvedNetwork.json")
         with open(resolved_network_path) as file:
             resolved_network = json.load(file)
         file.close()
@@ -119,4 +120,3 @@ class SchemaResolverTestCase4Errors(unittest.TestCase):
 
         print(context.exception)
         self.assertTrue('Please verify your URL or your schema' in str(context.exception))
-
