@@ -14,13 +14,7 @@ from jsonCycles.schemaResolver import SchemaResolver
 if __name__ == '__main__':
     schema_url = "https://datatagsuite.github.io/schema/study_schema.json"
     schema_resolver = SchemaResolver(schema_url, 'URL')
-    schema_resolver.resolve_network()
     schema_resolver.schemas_to_graph()
-    item_positions = list(schema_resolver.output.keys())
-    for cycle in schema_resolver.raw_cycles:
-        local_cycle = []
-        for item in cycle:
-            local_cycle.append(item_positions[item])
-        print("Cycle:", local_cycle)
+    schema_resolver.show()
 ```
 

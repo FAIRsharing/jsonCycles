@@ -51,6 +51,7 @@ class SchemaResolverTestCase4Path(unittest.TestCase):
             [0, 10, 26, 10],
             [0, 10, 30, 32, 10],
             [0, 10, 10]]
+        self.SchemaResolver.show()
         self.assertTrue(self.SchemaResolver.raw_cycles == expected_cycles)
 
 
@@ -118,3 +119,15 @@ class SchemaResolverTestCase4Errors(unittest.TestCase):
 
         print(context.exception)
         self.assertTrue('Please verify your URL or your schema' in str(context.exception))
+
+    def test_show_none(self):
+        schema_resolver = SchemaResolver(self.schema_url, 'url')
+        resolved_network = {
+            "A": ["B", "C"],
+            "B": ["D"],
+            "C": [],
+            "D": []
+        }
+        schema_resolver.set_resolved_schemas(resolved_network)
+        schema_resolver.schemas_to_graph()
+        schema_resolver.show()

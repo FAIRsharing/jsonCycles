@@ -155,3 +155,18 @@ class SchemaResolver:
 
         self.raw_cycles = graph.get_cycles()
         # return graph.get_cycles()
+
+    def show(self):
+        if not self.raw_cycles:
+            print('I do not have any cycle')
+            return
+
+        print('I have %s cycle(s)' % len(self.raw_cycles))
+        items_positions = list(self.output.keys())
+        i = 1
+        for cycle in self.raw_cycles:
+            local_cycle = []
+            for item in cycle:
+                local_cycle.append(items_positions[item])
+            print("Cycle %s: %s" % (i, local_cycle))
+            i += 1
