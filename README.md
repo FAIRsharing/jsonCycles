@@ -7,7 +7,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Run the tool
+### Run the tool from python (3.6+)
 ```
 from jsonCycles.schemaResolver import SchemaResolver
 
@@ -18,3 +18,8 @@ if __name__ == '__main__':
     schema_resolver.show()
 ```
 
+### Run our Jupyter Notebook
+
+jupyter notebook
+
+[notebooks/Finding_jsonCycles.ipynb#](https://github.com/FAIRsharing/jsonCycles/notebooks/Finding_jsonCycles.ipynb#)
